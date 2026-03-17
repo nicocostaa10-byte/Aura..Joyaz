@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aura | Joyas en Acero</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ── RESET & VARS ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#F7F2EB;
+  --cream2:#EDE6DA;
+  --brown:#3E2C23;
+  --brown2:#6A574D;
+  --brown3:#7A675C;
+  --gold:#B8935A;
+  --gold2:#D4AA70;
+  --gold3:#E8D5A3;
+  --white:#FFFDF9;
+  --shadow:0 8px 40px rgba(62,44,35,.12);
+  --shadow2:0 20px 60px rgba(62,44,35,.18);
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--brown);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden}
+img{display:block;max-width:100%}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+a{text-decoration:none;color:inherit}
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce{
+  background:var(--brown);color:var(--gold3);
+  font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;
+  text-align:center;padding:10px;
+}
+
+/* ── HEADER ── */
+header{
+  background:var(--cream);
+  border-bottom:1px solid var(--cream2);
+  position:sticky;top:0;z-index:200;
+  transition:box-shadow .3s;
+}
+header.scrolled{box-shadow:0 4px 20px rgba(62,44,35,.1)}
+.header-inner{
+  max-width:1320px;margin:0 auto;
+  padding:0 40px;height:76px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{display:flex;align-items:center;gap:14px}
+.logo-icon{
+  width:44px;height:44px;
+  background:var(--brown);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold2);font-size:1.1rem;
+  flex-shrink:0;
+}
+.logo-text h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:600;letter-spacing:.05em;
+  line-height:1;
+}
+.logo-text p{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--brown3);margin-top:2px}
+nav{display:flex;gap:36px}
+nav a{
+  font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brown2);transition:color .3s;position:relative;padding-bottom:3px;
+}
+nav a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:1px;
+  background:var(--gold);transition:width .3s;
+}
+nav a:hover{color:var(--gold)}
+nav a:hover::after{width:100%}
+.header-actions{display:flex;align-items:center;gap:16px}
+.btn-icon{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--brown2);font-size:1.1rem;transition:background .3s,color .3s;
+  position:relative;flex-shrink:0;
+}
+.btn-icon:hover{background:var(--cream2);color:var(--brown)}
+.cart-badge{
+  position:absolute;top:4px;right:4px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--gold);color:var(--white);
+  font-size:.55rem;font-weight:500;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(0);transition:.3s;
+}
+.cart-badge.show{opacity:1;transform:scale(1)}
+.btn-primary{
+  background:var(--brown);color:var(--white);
+  padding:10px 24px;border-radius:100px;
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  transition:background .3s,transform .2s;
+  white-space:nowrap;
+}
+.btn-primary:hover{background:#2F211B;transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{
+  min-height:90vh;display:grid;grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+.hero-left{
+  background:var(--brown);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:100px 80px 100px 100px;
+  position:relative;overflow:hidden;
+}
+.hero-left::before{
+  content:'';position:absolute;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,147,90,.15),transparent 70%);
+  top:-100px;right:-100px;
+}
+.hero-left::after{
+  content:'';position:absolute;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,147,90,.1),transparent 70%);
+  bottom:-80px;left:-80px;
+}
+.hero-tag{
+  font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:28px;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-tag::before{content:'';width:30px;height:1px;background:var(--gold2)}
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.4rem,4vw,4.5rem);
+  font-weight:300;line-height:1.1;
+  color:var(--white);margin-bottom:24px;
+}
+.hero-title em{font-style:italic;color:var(--gold2)}
+.hero-desc{
+  font-size:.8rem;line-height:2;
+  color:rgba(255,255,255,.55);max-width:380px;margin-bottom:48px;
+}
+.hero-btns{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.hero-btn-main{
+  background:var(--gold);color:var(--brown);
+  padding:14px 36px;border-radius:100px;
+  font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;
+  font-weight:500;transition:.3s;
+}
+.hero-btn-main:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,147,90,.35)}
+.hero-btn-sec{
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);
+  display:flex;align-items:center;gap:8px;transition:color .3s;
+}
+.hero-btn-sec:hover{color:var(--gold2)}
+.hero-btn-sec span{font-size:1rem}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease}
+.hero-right:hover img{transform:scale(1.04)}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(62,44,35,.3),transparent 50%);
+}
+.hero-badge{
+  position:absolute;bottom:48px;left:48px;
+  background:rgba(255,253,249,.92);backdrop-filter:blur(12px);
+  border-radius:16px;padding:20px 24px;
+  box-shadow:var(--shadow);
+  animation:badgeIn 1s .8s both;
+}
+@keyframes badgeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-badge-label{font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--brown3);margin-bottom:6px}
+.hero-badge-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:600;color:var(--brown);
+  display:flex;align-items:baseline;gap:4px;
+}
+.hero-badge-val small{font-size:.9rem;font-weight:300}
+.hero-stats{
+  position:absolute;top:48px;right:48px;
+  display:flex;flex-direction:column;gap:12px;
+  animation:badgeIn 1s 1s both;
+}
+.stat-pill{
+  background:rgba(255,253,249,.88);backdrop-filter:blur(12px);
+  border-radius:100px;padding:8px 18px;
+  font-size:.6rem;letter-spacing:.1em;color:var(--brown2);
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 4px 16px rgba(62,44,35,.1);
+}
+.stat-pill span{font-size:.85rem}
+
+/* ── SECTION ── */
+.section{padding:80px 40px}
+.section-max{max-width:1320px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:60px}
+.section-eyebrow{
+  font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.section-eyebrow::before,.section-eyebrow::after{content:'';width:24px;height:1px;background:var(--gold)}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,3.5vw,3.2rem);
+  font-weight:300;line-height:1.15;color:var(--brown);
+}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-sub{
+  margin-top:14px;font-size:.78rem;
+  color:var(--brown3);line-height:1.8;max-width:480px;
+  margin-left:auto;margin-right:auto;
+}
+
+/* ── FILTERS ── */
+.filters{
+  display:flex;gap:10px;justify-content:center;
+  flex-wrap:wrap;margin-bottom:48px;
+}
+.filter-btn{
+  padding:9px 24px;border-radius:100px;
+  border:1px solid var(--cream2);
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--brown2);transition:.3s;background:var(--white);
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--brown);color:var(--white);border-color:var(--brown);
+}
+
+/* ── PRODUCT GRID ── */
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+}
+.product-card{
+  background:var(--white);
+  border-radius:20px;overflow:hidden;
+  transition:transform .35s,box-shadow .35s;
+  position:relative;
+}
+.product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow2)}
+.product-img-wrap{
+  position:relative;overflow:hidden;
+  aspect-ratio:1;background:var(--cream2);
+}
+.product-img-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+.product-card:hover .product-img-wrap img{transform:scale(1.08)}
+.product-tag{
+  position:absolute;top:14px;left:14px;
+  background:var(--brown);color:var(--white);
+  font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:5px 12px;border-radius:100px;
+}
+.product-tag.gold{background:var(--gold);color:var(--white)}
+.product-tag.sale{background:#C0392B;color:var(--white)}
+.product-actions{
+  position:absolute;top:14px;right:14px;
+  display:flex;flex-direction:column;gap:8px;
+  opacity:0;transform:translateX(8px);transition:.3s;
+}
+.product-card:hover .product-actions{opacity:1;transform:translateX(0)}
+.action-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;box-shadow:0 4px 12px rgba(62,44,35,.15);
+  transition:background .2s,color .2s;
+}
+.action-btn:hover{background:var(--brown);color:var(--white)}
+.product-body{padding:20px 22px 22px}
+.product-cat{
+  font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:6px;
+}
+.product-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem;font-weight:600;color:var(--brown);
+  margin-bottom:4px;line-height:1.2;
+}
+.product-mat{font-size:.65rem;color:var(--brown3);margin-bottom:16px}
+.product-footer{display:flex;align-items:center;justify-content:space-between}
+.product-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;font-weight:600;color:var(--brown);
+}
+.product-price-old{
+  font-size:.75rem;color:var(--brown3);
+  text-decoration:line-through;margin-left:6px;
+}
+.add-btn{
+  background:var(--brown);color:var(--white);
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;transition:.3s;flex-shrink:0;
+}
+.add-btn:hover{background:var(--gold);transform:rotate(90deg) scale(1.1)}
+.heart-btn{font-size:1.1rem;transition:.3s}
+.heart-btn.liked{color:#e74c3c}
+
+/* ── QUICK VIEW MODAL ── */
+.qv-overlay{
+  position:fixed;inset:0;background:rgba(62,44,35,.6);
+  z-index:500;display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);padding:20px;
+}
+.qv-overlay.show{display:flex}
+.qv-modal{
+  background:var(--white);border-radius:24px;
+  width:90%;max-width:860px;max-height:90vh;
+  overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;
+}
+.qv-img{overflow:hidden;border-radius:24px 0 0 24px}
+.qv-img img{width:100%;height:100%;object-fit:cover}
+.qv-content{padding:48px 40px;display:flex;flex-direction:column;gap:16px}
+.qv-cat{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.qv-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:600;color:var(--brown);line-height:1.1;
+}
+.qv-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:600;color:var(--gold);
+}
+.qv-desc{font-size:.75rem;line-height:1.9;color:var(--brown2)}
+.qv-divider{height:1px;background:var(--cream2)}
+.qv-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qv-meta-item p{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brown3);margin-bottom:4px}
+.qv-meta-item span{font-size:.78rem;color:var(--brown);font-weight:500}
+.qty-wrap{display:flex;align-items:center;gap:0;border:1px solid var(--cream2);border-radius:100px;width:fit-content;overflow:hidden}
+.qty-btn{
+  width:38px;height:38px;font-size:1.1rem;
+  color:var(--brown2);transition:.2s;
+}
+.qty-btn:hover{background:var(--cream2);color:var(--brown)}
+.qty-val{width:40px;text-align:center;font-size:.85rem;font-weight:500}
+.qv-add{
+  background:var(--brown);color:var(--white);
+  padding:14px;border-radius:12px;
+  font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+  transition:.3s;margin-top:auto;
+}
+.qv-add:hover{background:var(--gold);transform:translateY(-2px)}
+.qv-close{
+  position:absolute;top:20px;right:20px;
+  width:36px;height:36px;border-radius:50%;
+  background:var(--cream2);font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:.2s;
+}
+.qv-close:hover{background:var(--brown);color:var(--white)}
+.qv-wrapper{position:relative;width:100%;display:flex;justify-content:center}
+
+/* ── BANNER ── */
+.banner-section{
+  margin:0 40px 80px;border-radius:28px;overflow:hidden;
+  position:relative;height:320px;
+}
+.banner-img{width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
+.banner-content{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  color:var(--white);padding:40px;
+}
+.banner-content h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.4rem,3.5vw,3rem);
+  font-weight:300;font-style:italic;margin-bottom:12px;
+}
+.banner-content p{
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold3);margin-bottom:28px;
+}
+.banner-btn{
+  border:1px solid rgba(255,255,255,.6);color:var(--white);
+  padding:12px 32px;border-radius:100px;
+  font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  transition:.3s;
+}
+.banner-btn:hover{background:var(--gold);border-color:var(--gold)}
+
+/* ── FEATURES ── */
+.features-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-radius:20px;overflow:hidden;
+  border:1px solid var(--cream2);
+  margin-bottom:80px;
+}
+.feature-item{
+  padding:36px 32px;text-align:center;
+  border-right:1px solid var(--cream2);
+  background:var(--white);transition:background .3s;
+}
+.feature-item:last-child{border-right:none}
+.feature-item:hover{background:var(--cream)}
+.feature-icon{font-size:1.8rem;margin-bottom:14px;display:block}
+.feature-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-weight:600;color:var(--brown);margin-bottom:8px;
+}
+.feature-desc{font-size:.65rem;line-height:1.8;color:var(--brown3)}
+
+/* ── CART DRAWER ── */
+.cart-overlay{
+  position:fixed;inset:0;background:rgba(62,44,35,.5);
+  z-index:400;display:none;backdrop-filter:blur(3px);
+}
+.cart-overlay.show{display:block}
+.cart-drawer{
+  position:fixed;top:0;right:-480px;
+  width:460px;height:100dvh;
+  background:var(--white);z-index:401;
+  transition:right .4s cubic-bezier(.25,.46,.45,.94);
+  display:flex;flex-direction:column;
+  box-shadow:-20px 0 60px rgba(62,44,35,.15);
+}
+.cart-drawer.open{right:0}
+.cart-header{
+  padding:24px 28px;border-bottom:1px solid var(--cream2);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.cart-header h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:600;color:var(--brown);
+}
+.close-cart{
+  width:36px;height:36px;border-radius:50%;background:var(--cream2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:.2s;flex-shrink:0;
+}
+.close-cart:hover{background:var(--brown);color:var(--white)}
+.cart-items{flex:1;overflow-y:auto;padding:20px 28px;-webkit-overflow-scrolling:touch}
+.cart-item{
+  display:flex;gap:14px;padding:14px 0;
+  border-bottom:1px solid var(--cream2);
+  animation:slideIn .3s ease;
+}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.cart-item-img{
+  width:68px;height:68px;border-radius:12px;
+  overflow:hidden;flex-shrink:0;background:var(--cream2);
+}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-cat{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
+.cart-item-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--brown);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cart-item-price{font-size:.8rem;color:var(--brown2);margin-top:4px}
+.cart-item-remove{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--cream2);font-size:.8rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:.2s;flex-shrink:0;align-self:center;
+}
+.cart-item-remove:hover{background:#fee;color:#c0392b}
+.cart-empty{
+  text-align:center;padding:60px 20px;
+  color:var(--brown3);
+}
+.cart-empty span{font-size:3rem;display:block;margin-bottom:16px;opacity:.4}
+.cart-empty p{font-family:'Cormorant Garamond',serif;font-size:1.2rem}
+.cart-footer{
+  padding:20px 28px 28px;border-top:1px solid var(--cream2);
+  background:var(--cream);flex-shrink:0;
+}
+.zona-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brown3);display:block;margin-bottom:8px}
+.zona-select{
+  width:100%;padding:12px 16px;
+  border:1px solid var(--cream2);border-radius:12px;
+  background:var(--white);color:var(--brown);
+  font-size:.75rem;font-family:'DM Sans',sans-serif;
+  margin-bottom:12px;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236A574D' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  cursor:pointer;
+}
+.cart-totals{margin-bottom:16px}
+.cart-row{display:flex;justify-content:space-between;font-size:.75rem;color:var(--brown2);margin-bottom:8px}
+.cart-row.total{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:600;color:var(--brown);
+  border-top:1px solid var(--cream2);padding-top:12px;margin-top:4px;
+}
+.cart-btns{display:flex;flex-direction:column;gap:10px}
+.btn-wa{
+  background:#25D366;color:var(--white);
+  padding:14px;border-radius:12px;
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:.3s;
+}
+.btn-wa:hover{background:#1ebe5d;transform:translateY(-1px)}
+.btn-mp{
+  background:#009EE3;color:var(--white);
+  padding:14px;border-radius:12px;
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:.3s;
+}
+.btn-mp:hover{background:#0089c7;transform:translateY(-1px)}
+
+/* ── MODAL MP ALIAS ── */
+.mp-modal-overlay{
+  position:fixed;inset:0;background:rgba(62,44,35,.6);
+  z-index:600;display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);padding:20px;
+}
+.mp-modal-overlay.show{display:flex}
+.mp-modal{
+  background:var(--white);border-radius:24px;
+  padding:40px 36px;max-width:360px;width:100%;
+  text-align:center;position:relative;
+  box-shadow:var(--shadow2);
+}
+.mp-modal-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--cream2);font-size:.9rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:.2s;
+}
+.mp-modal-close:hover{background:var(--brown);color:var(--white)}
+.mp-modal-icon{font-size:2.5rem;margin-bottom:16px}
+.mp-modal h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:600;color:var(--brown);margin-bottom:8px;
+}
+.mp-modal p{font-size:.75rem;color:var(--brown3);margin-bottom:20px;line-height:1.7}
+.mp-alias-box{
+  background:var(--cream);border:1px dashed var(--gold);
+  border-radius:12px;padding:16px;margin-bottom:20px;
+}
+.mp-alias-label{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--brown3);margin-bottom:6px}
+.mp-alias-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:600;color:var(--gold);letter-spacing:.02em;
+}
+.mp-total-line{font-size:.8rem;color:var(--brown2);margin-bottom:24px}
+.mp-total-line strong{color:var(--brown);font-weight:600}
+.mp-btn-go{
+  background:#009EE3;color:var(--white);
+  width:100%;padding:14px;border-radius:12px;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  transition:.3s;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.mp-btn-go:hover{background:#0089c7;transform:translateY(-1px)}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--brown);color:var(--white);
+  padding:12px 28px;border-radius:100px;
+  font-size:.72rem;letter-spacing:.08em;
+  z-index:700;opacity:0;transition:.35s;pointer-events:none;
+  display:flex;align-items:center;gap:10px;
+  white-space:nowrap;max-width:90vw;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── WISHLIST DRAWER ── */
+.wishlist-drawer{
+  position:fixed;top:0;right:-460px;
+  width:440px;height:100dvh;
+  background:var(--white);z-index:401;
+  transition:right .4s cubic-bezier(.25,.46,.45,.94);
+  display:flex;flex-direction:column;
+  box-shadow:-20px 0 60px rgba(62,44,35,.15);
+}
+.wishlist-drawer.open{right:0}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--brown);color:rgba(255,255,255,.7);
+  padding:64px 40px 32px;
+}
+.footer-grid{
+  max-width:1320px;margin:0 auto;
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:60px;
+  margin-bottom:60px;
+}
+.footer-brand h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;color:var(--gold2);margin-bottom:8px;letter-spacing:.05em;
+}
+.footer-brand p{font-size:.7rem;line-height:2;max-width:240px;margin-bottom:24px}
+.socials{display:flex;gap:10px}
+.social-btn{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;transition:.3s;
+}
+.social-btn:hover{border-color:var(--gold2);color:var(--gold2)}
+.footer-col h4{
+  font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:20px;
+}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:12px}
+.footer-col a{font-size:.72rem;transition:color .3s}
+.footer-col a:hover{color:var(--gold2)}
+.footer-bottom{
+  max-width:1320px;margin:0 auto;
+  border-top:1px solid rgba(255,255,255,.1);
+  padding-top:28px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-copy{font-size:.62rem;letter-spacing:.1em}
+.payment-icons{display:flex;gap:10px;font-size:.7rem;align-items:center;color:rgba(255,255,255,.4)}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE MENU TOGGLE ── */
+.menu-toggle{
+  display:none;
+  width:40px;height:40px;border-radius:50%;
+  align-items:center;justify-content:center;
+  font-size:1.2rem;color:var(--brown2);
+  transition:background .2s;
+}
+.menu-toggle:hover{background:var(--cream2)}
+
+/* ── MOBILE NAV ── */
+.mobile-nav{
+  display:none;
+  flex-direction:column;
+  background:var(--cream);
+  border-top:1px solid var(--cream2);
+  padding:20px 24px;
+  gap:4px;
+}
+.mobile-nav.open{display:flex}
+.mobile-nav a{
+  font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brown2);padding:12px 0;
+  border-bottom:1px solid var(--cream2);
+  transition:color .2s;
+}
+.mobile-nav a:last-child{border-bottom:none}
+.mobile-nav a:hover{color:var(--gold)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{height:380px}
+  .hero-left{padding:72px 48px}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .features-row{grid-template-columns:1fr 1fr}
+  .feature-item:nth-child(2){border-right:none}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+}
+
+@media(max-width:768px){
+  .header-inner{padding:0 20px;height:64px}
+  nav{display:none}
+  .btn-primary{display:none}
+  .menu-toggle{display:flex}
+  .section{padding:52px 20px}
+  .banner-section{margin:0 16px 52px;height:220px;border-radius:20px}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+  .cart-drawer,.wishlist-drawer{width:100%;right:-100%}
+  .cart-footer{padding:16px 20px 24px}
+  .cart-items{padding:16px 20px}
+  .cart-header{padding:20px 20px}
+  .qv-modal{grid-template-columns:1fr;width:100%}
+  .qv-img{border-radius:24px 24px 0 0;max-height:260px}
+  .qv-content{padding:28px 24px}
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+  .features-row{grid-template-columns:1fr 1fr}
+  .feature-item{padding:24px 20px}
+  .hero-badge{bottom:24px;left:24px;padding:14px 18px}
+  .hero-stats{top:24px;right:24px}
+  .stat-pill{font-size:.58rem;padding:6px 14px}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:8px}
+}
+
+@media(max-width:480px){
+  .header-inner{padding:0 16px}
+  .logo-text p{display:none}
+  .product-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .product-body{padding:14px 14px 16px}
+  .product-name{font-size:1.05rem}
+  .product-price{font-size:1.15rem}
+  .hero-left{padding:52px 24px 60px}
+  .hero-title{font-size:2.2rem}
+  .hero-right{height:300px}
+  .hero-badge{display:none}
+  .section{padding:44px 16px}
+  .section-title{font-size:1.9rem}
+  .banner-section{margin:0 12px 44px;height:200px}
+  .banner-content{padding:24px 20px}
+  .features-row{grid-template-columns:1fr}
+  .feature-item{border-right:none;border-bottom:1px solid var(--cream2)}
+  .feature-item:last-child{border-bottom:none}
+  .footer-grid{grid-template-columns:1fr}
+  footer{padding:44px 20px 28px}
+  .filters{gap:8px}
+  .filter-btn{padding:8px 16px;font-size:.62rem}
+  .cart-drawer{width:100%;right:-100%}
+  .mp-modal{padding:32px 24px}
+  .qv-content{padding:24px 20px}
+  .toast{font-size:.65rem;padding:10px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce">✦ Envios a Domicilio · Acero quirúrgico premium ✦</div>
+
+<!-- HEADER -->
+<header id="mainHeader">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">◈</div>
+      <div class="logo-text">
+        <h1>Aura</h1>
+        <p>Joyas en Acero</p>
+      </div>
+    </div>
+    <nav>
+      <a href="#coleccion">Colección</a>
+      <a href="#coleccion">Anillos</a>
+      <a href="#coleccion">Collares</a>
+      <a href="#coleccion">Pulseras</a>
+      <a href="#coleccion">Aretes</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-icon" onclick="toggleSearch()" title="Buscar">🔍</button>
+      <button class="btn-icon" onclick="toggleWishlist()" title="Favoritos">
+        🤍 <span id="wishBadge" class="cart-badge">0</span>
+      </button>
+      <button class="btn-icon" onclick="openCart()" title="Carrito">
+        🛒 <span id="cartBadge" class="cart-badge">0</span>
+      </button>
+      <a href="https://instagram.com/aurajoyas" target="_blank" class="btn-primary">Instagram</a>
+      <button class="menu-toggle" onclick="toggleMobileMenu()" id="menuToggle" aria-label="Menú">☰</button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#coleccion" onclick="closeMobileMenu()">Colección</a>
+    <a href="#coleccion" onclick="closeMobileMenu()">Anillos</a>
+    <a href="#coleccion" onclick="closeMobileMenu()">Collares</a>
+    <a href="#coleccion" onclick="closeMobileMenu()">Pulseras</a>
+    <a href="#coleccion" onclick="closeMobileMenu()">Aretes</a>
+    <a href="https://instagram.com/aurajoyas" target="_blank">Instagram ↗</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Nueva Colección 2026</p>
+    <h2 class="hero-title">Elegancia que<br><em>eleva tu energía</em></h2>
+    <p class="hero-desc">Piezas únicas en acero quirúrgico premium. Diseños atemporales que acompañan cada momento de tu vida.</p>
+    <div class="hero-btns">
+      <a href="#coleccion" class="hero-btn-main">Ver Colección</a>
+      <a href="#" class="hero-btn-sec"><span>▶</span> Nuestra Historia</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://scontent.faep8-2.fna.fbcdn.net/v/t39.30808-6/646979051_122267596736179123_1536873715004104199_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=13d280&_nc_ohc=SvKocIi4xZkQ7kNvwFJXYcO&_nc_oc=Adlid-2zMPpc-iSS3b8NvcAYpkI2i4CBlVVcGTKQqEiBa-BtG2NKw5yh6Tw8f-syo94&_nc_zt=23&_nc_ht=scontent.faep8-2.fna&_nc_gid=sNU7e5ecN3ljNJJAyKXZew&_nc_ss=8&oh=00_AfzDdgCmK25gKwbAwQfYXL7l_5-bijxx4X0kS_8yuQtG_w&oe=69AF7BB9" alt="Joya Aura"/>
+    <div class="hero-overlay"></div>
+    <div class="hero-badge">
+      <p class="hero-badge-label">Pieza destacada</p>
+      <div class="hero-badge-val">Collar Luna <small>· $28.000</small></div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-pill"><span>⭐</span> 4.9 · 320 reseñas</div>
+      <div class="stat-pill"><span>🔒</span> Compra segura</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" style="padding-top:64px;padding-bottom:0">
+  <div class="section-max">
+    <div class="features-row reveal">
+      <div class="feature-item">
+        <span class="feature-icon">💍</span>
+        <h4 class="feature-title">Acero Quirúrgico</h4>
+        <p class="feature-desc">316L premium. Hipoalergénico,<br>resistente al agua y sin oxidación.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">✨</span>
+        <h4 class="feature-title">Acero Dorado</h4>
+        <p class="feature-desc">Acero con baño dorado que ofrece un acabado elegante y moderno sin perder resistencia.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🤍</span>
+        <h4 class="feature-title">Acero Blanco</h4>
+        <p class="feature-desc">Acero con acabado plateado brillante, sofisticado y fácil de combinar con cualquier estilo.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💫</span>
+        <h4 class="feature-title">Fantasía</h4>
+        <p class="feature-desc">Piezas de moda elaboradas con materiales variados pensadas para complementar looks y tendencias.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="coleccion">
+  <div class="section-max">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">Nuestra Selección</p>
+      <h2 class="section-title">Piezas <em>Únicas</em></h2>
+      <p class="section-sub">Cada joya diseñada para durar toda la vida. Sin manchas, sin alergias, sin límites.</p>
+    </div>
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">Todas</button>
+      <button class="filter-btn" data-filter="anillo">Anillos</button>
+      <button class="filter-btn" data-filter="collar">Collares</button>
+      <button class="filter-btn" data-filter="pulsera">Pulseras</button>
+      <button class="filter-btn" data-filter="aro">Aretes</button>
+    </div>
+    <div class="product-grid reveal" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<div class="banner-section reveal">
+  <img class="banner-img" src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1400&q=80" alt="Colección especial"/>
+  <div class="banner-content">
+    <h3>"En el lugar correcto brillas diferente, brillá aún más con Aura.Joyaz"</h3>
+    <p>✦ Personalizá tu pieza · Grabado incluido ✦</p>
+    <a href="#" class="banner-btn">Consultar personalización</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h2>Aura</h2>
+      <p>Joyas en acero quirúrgico premium. Piezas diseñadas para durar toda una vida, sin perder el brillo.</p>
+      <div class="socials">
+        <a href="https://instagram.com/aurajoyas" target="_blank" class="social-btn">ig</a>
+        <a href="#" class="social-btn">fb</a>
+        <a href="#" class="social-btn">wa</a>
+        <a href="#" class="social-btn">tt</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Colección</h4>
+      <ul>
+        <li><a href="#">Anillos</a></li>
+        <li><a href="#">Collares</a></li>
+        <li><a href="#">Pulseras</a></li>
+        <li><a href="#">Aretes</a></li>
+        <li><a href="#">Novedades</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Atención</h4>
+      <ul>
+        <li><a href="#">Cómo Comprar</a></li>
+        <li><a href="#">Envíos</a></li>
+        <li><a href="#">Cambios y Devoluciones</a></li>
+        <li><a href="#">Garantía</a></li>
+        <li><a href="#">Cuidado de Joyas</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/541167908514" target="_blank">📱 WhatsApp</a></li>
+        <li><a href="mailto:maidanaperaltajazmin7@gmail.com">📧 maidanaperaltajazmin7@gmail.com</a></li>
+        <li><a href="#">📍 Buenos Aires, AR</a></li>
+        <li><a href="#">Lun–Vie · 10 a 18h</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Aura Joyas · Todos los derechos reservados</p>
+    <div class="payment-icons">
+      <span>💳</span> Mercado Pago · Transferencia · Efectivo
+    </div>
+  </div>
+</footer>
+
+<!-- CART OVERLAY + DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h3>Tu Carrito</h3>
+    <button class="close-cart" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <label class="zona-label">Zona de envío</label>
+    <select class="zona-select" id="zonaSelect" onchange="calcularTotal()">
+      <option value="0">Retiro en mano — Gratis</option>
+      <option value="7000">CABA — $7.000</option>
+      <option value="9000">GBA — $9.000</option>
+      <option value="12000">Interior — $12.000</option>
+    </select>
+    <div class="cart-totals">
+      <div class="cart-row"><span>Subtotal</span><span id="subtotal">$0</span></div>
+      <div class="cart-row"><span>Envío</span><span id="envioVal">Gratis</span></div>
+      <div class="cart-row total"><span>Total</span><span id="totalFinal">$0</span></div>
+    </div>
+    <div class="cart-btns">
+      <button class="btn-wa" onclick="enviarWhatsApp()">
+        <span>💬</span> Finalizar por WhatsApp
+      </button>
+      <button class="btn-mp" onclick="mostrarAlias()">
+        <span>💳</span> Pagar con Mercado Pago
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL MERCADO PAGO -->
+<div class="mp-modal-overlay" id="mpModalOverlay" onclick="cerrarMPModal(event)">
+  <div class="mp-modal">
+    <button class="mp-modal-close" onclick="document.getElementById('mpModalOverlay').classList.remove('show')">✕</button>
+    <div class="mp-modal-icon">💳</div>
+    <h4>Pagar con Mercado Pago</h4>
+    <p>Transferí el total de tu pedido al siguiente alias y luego envianos el comprobante por WhatsApp.</p>
+    <div class="mp-alias-box">
+      <p class="mp-alias-label">Alias MP</p>
+      <p class="mp-alias-val">iamyazmin</p>
+    </div>
+    <p class="mp-total-line">Total a abonar: <strong id="mpTotalVal">$0</strong></p>
+    <button class="mp-btn-go" onclick="irAMP()">
+      <span>💳</span> Abrir Mercado Pago
+    </button>
+  </div>
+</div>
+
+<!-- WISHLIST DRAWER -->
+<div class="wishlist-drawer" id="wishlistDrawer">
+  <div class="cart-header">
+    <h3>Mis Favoritos</h3>
+    <button class="close-cart" onclick="toggleWishlist()">✕</button>
+  </div>
+  <div class="cart-items" id="wishlistItems"></div>
+</div>
+
+<!-- QUICK VIEW MODAL -->
+<div class="qv-overlay" id="qvOverlay" onclick="closeQV(event)">
+  <div class="qv-wrapper">
+    <button class="qv-close" onclick="closeQVBtn()">✕</button>
+    <div class="qv-modal" id="qvModal"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Agregado al carrito</div>
+
+<script>
+// ===================== CATÁLOGO =====================
+const productos = [
+  {id:1, nombre:"Anillo Aura", cat:"anillo", mat:"Acero quirúrgico dorado", precio:18000, img:"https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&q=80", tag:"Más Vendido", tagClass:"gold", desc:"Anillo minimalista con baño en oro 18k sobre acero 316L. Hipoalergénico y resistente al agua. Disponible en tallas 14–20."},
+  {id:2, nombre:"Collar Luna",  cat:"collar", mat:"Acero plateado · Dije de luna", precio:25000, img:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=80", tag:"Nuevo", tagClass:"", desc:"Collar delicado con dije de luna llena. Cadena tipo rolo en acero plateado, largo 45cm con extensor."},
+  {id:3, nombre:"Aros Luz",     cat:"aro",    mat:"Acero · Piedra natural", precio:15000, img:"https://images.unsplash.com/photo-1573408301185-9519f94816b5?w=500&q=80", tag:"", tagClass:"", desc:"Aros argolla con piedra natural incrustada. Cierre de click, antialérgicos. Ideal uso diario."},
+  {id:4, nombre:"Pulsera Energía", cat:"pulsera", mat:"Acero · Cristales", precio:22000, img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=80", tag:"Exclusivo", tagClass:"gold", desc:"Pulsera tipo esclava con cristales facetados. Cierre magnético de doble seguridad."},
+  {id:5, nombre:"Anillo Cosmos", cat:"anillo", mat:"Acero negro · Detalles dorados", precio:20000, img:"https://images.unsplash.com/photo-1586374579358-9d19d632b6d7?w=500&q=80", tag:"", tagClass:"", desc:"Anillo de banda ancha en acero negro mate con grabado geométrico y detalles en dorado."},
+  {id:6, nombre:"Collar Eternidad", cat:"collar", mat:"Acero dorado · Diamante sintético", precio:32000, img:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500&q=80", tag:"Nuevo", tagClass:"", desc:"Collar con colgante en forma de infinito y diamante sintético central. Cadena veneziana 42cm."},
+  {id:7, nombre:"Aros Argolla", cat:"aro", mat:"Acero rosado · 3cm diámetro", precio:12000, img:"https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=500&q=80", tag:"", tagClass:"", desc:"Argollas clásicas en acero con baño de oro rosado. Cierre tipo click. Peso ultra liviano."},
+  {id:8, nombre:"Pulsera Boho", cat:"pulsera", mat:"Acero · Cadena fina", precio:14000, img:"https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=500&q=80", tag:"Oferta", tagClass:"sale", precioViejo:18000, desc:"Pulsera cadena fina con charm de estrella. Regulable. Acero plateado con brillo espejo."},
+  {id:9, nombre:"Collar Perla", cat:"collar", mat:"Acero · Perla cultivada", precio:28000, img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=80", tag:"", tagClass:"", desc:"Collar minimalista con perla cultivada colgante. Cadena delgada tipo cable, largo 40cm."},
+];
+
+let carrito = [];
+let wishlist = [];
+let filtroActivo = "all";
+
+// ===================== RENDER PRODUCTOS =====================
+function renderProductos(filtro = "all") {
+  const grid = document.getElementById("productGrid");
+  const lista = filtro === "all" ? productos : productos.filter(p => p.cat === filtro);
+  grid.innerHTML = "";
+  lista.forEach((p, i) => {
+    const enWish = wishlist.find(w => w.id === p.id);
+    grid.innerHTML += `
+    <div class="product-card reveal" style="transition-delay:${i*0.07}s" data-id="${p.id}">
+      <div class="product-img-wrap">
+        <img src="${p.img}" alt="${p.nombre}" loading="lazy"/>
+        ${p.tag ? `<span class="product-tag ${p.tagClass}">${p.tag}</span>` : ""}
+        <div class="product-actions">
+          <button class="action-btn heart-btn ${enWish?'liked':''}" onclick="toggleWishlistItem(${p.id})" title="Favorito">${enWish?'❤️':'🤍'}</button>
+          <button class="action-btn" onclick="openQV(${p.id})" title="Vista rápida">👁️</button>
+        </div>
+      </div>
+      <div class="product-body">
+        <p class="product-cat">${p.cat.charAt(0).toUpperCase()+p.cat.slice(1)}</p>
+        <h3 class="product-name">${p.nombre}</h3>
+        <p class="product-mat">${p.mat}</p>
+        <div class="product-footer">
+          <div>
+            <span class="product-price">$${p.precio.toLocaleString("es-AR")}</span>
+            ${p.precioViejo?`<span class="product-price-old">$${p.precioViejo.toLocaleString("es-AR")}</span>`:""}
+          </div>
+          <button class="add-btn" onclick="agregarAlCarrito(${p.id})" title="Agregar">+</button>
+        </div>
+      </div>
+    </div>`;
+  });
+  document.querySelectorAll(".reveal:not(.in)").forEach(el => observer.observe(el));
+}
+
+// ===================== CART =====================
+function agregarAlCarrito(id, qty=1) {
+  const prod = productos.find(p => p.id === id);
+  for(let i=0;i<qty;i++) carrito.push({...prod, uid: Date.now()+Math.random()});
+  actualizarCarrito();
+  showToast(`✓ "${prod.nombre}" agregado`);
+  openCart();
+}
+
+function quitarDelCarrito(uid) {
+  carrito = carrito.filter(p => p.uid !== uid);
+  actualizarCarrito();
+}
+
+function actualizarCarrito() {
+  const badge = document.getElementById("cartBadge");
+  badge.textContent = carrito.length;
+  carrito.length > 0 ? badge.classList.add("show") : badge.classList.remove("show");
+  renderCartItems();
+  calcularTotal();
+}
+
+function renderCartItems() {
+  const el = document.getElementById("cartItems");
+  if (!carrito.length) {
+    el.innerHTML = `<div class="cart-empty"><span>🛒</span><p>Tu carrito está vacío</p></div>`;
+    return;
+  }
+  el.innerHTML = carrito.map(p => `
+    <div class="cart-item">
+      <div class="cart-item-img"><img src="${p.img}" alt="${p.nombre}"/></div>
+      <div class="cart-item-info">
+        <p class="cart-item-cat">${p.cat}</p>
+        <p class="cart-item-name">${p.nombre}</p>
+        <p class="cart-item-price">$${p.precio.toLocaleString("es-AR")}</p>
+      </div>
+      <button class="cart-item-remove" onclick="quitarDelCarrito(${p.uid})">✕</button>
+    </div>`).join("");
+}
+
+function calcularTotal() {
+  const subtotal = carrito.reduce((a,b)=>a+b.precio,0);
+  const envio = parseInt(document.getElementById("zonaSelect")?.value||0);
+  const total = subtotal + envio;
+  document.getElementById("subtotal").textContent = "$"+subtotal.toLocaleString("es-AR");
+  document.getElementById("envioVal").textContent = envio > 0 ? "$"+envio.toLocaleString("es-AR") : "Gratis";
+  document.getElementById("totalFinal").textContent = "$"+total.toLocaleString("es-AR");
+}
+
+function openCart() {
+  document.getElementById("cartDrawer").classList.add("open");
+  document.getElementById("cartOverlay").classList.add("show");
+  document.getElementById("wishlistDrawer").classList.remove("open");
+}
+function closeCart() {
+  document.getElementById("cartDrawer").classList.remove("open");
+  document.getElementById("cartOverlay").classList.remove("show");
+}
+
+// ===================== WHATSAPP =====================
+function enviarWhatsApp() {
+  if(!carrito.length){showToast("⚠️ Tu carrito está vacío");return}
+  let msg = "Hola Aura! 💛 Quiero hacer este pedido:%0A%0A";
+  carrito.forEach(p=>{ msg+=`• ${p.nombre} — $${p.precio.toLocaleString("es-AR")}%0A`; });
+  const zona = document.getElementById("zonaSelect");
+  msg += `%0AZona: ${zona.options[zona.selectedIndex].text}`;
+  msg += `%0ATotal: ${document.getElementById("totalFinal").textContent}`;
+  window.open(`https://wa.me/541167908514?text=${msg}`,"_blank");
+}
+
+// ===================== MERCADO PAGO =====================
+function mostrarAlias() {
+  if(!carrito.length){showToast("⚠️ Tu carrito está vacío");return}
+  document.getElementById("mpTotalVal").textContent = document.getElementById("totalFinal").textContent;
+  document.getElementById("mpModalOverlay").classList.add("show");
+}
+function cerrarMPModal(e) {
+  if(e.target === document.getElementById("mpModalOverlay"))
+    document.getElementById("mpModalOverlay").classList.remove("show");
+}
+function irAMP() {
+  window.open("https://link.mercadopago.com.ar/iamyazmin","_blank");
+}
+
+// ===================== WISHLIST =====================
+function toggleWishlistItem(id) {
+  const prod = productos.find(p=>p.id===id);
+  const idx = wishlist.findIndex(p=>p.id===id);
+  if(idx===-1){
+    wishlist.push(prod);
+    showToast(`❤️ "${prod.nombre}" guardado en favoritos`);
+  } else {
+    wishlist.splice(idx,1);
+    showToast(`🤍 Eliminado de favoritos`);
+  }
+  const badge = document.getElementById("wishBadge");
+  badge.textContent = wishlist.length;
+  wishlist.length > 0 ? badge.classList.add("show") : badge.classList.remove("show");
+  renderProductos(filtroActivo);
+  renderWishlist();
+}
+
+function renderWishlist() {
+  const el = document.getElementById("wishlistItems");
+  if(!wishlist.length){
+    el.innerHTML=`<div class="cart-empty"><span>🤍</span><p>Aún no tenés favoritos</p></div>`;return;
+  }
+  el.innerHTML=wishlist.map(p=>`
+    <div class="cart-item">
+      <div class="cart-item-img"><img src="${p.img}" alt="${p.nombre}"/></div>
+      <div class="cart-item-info">
+        <p class="cart-item-name">${p.nombre}</p>
+        <p class="cart-item-price">$${p.precio.toLocaleString("es-AR")}</p>
+        <button onclick="agregarAlCarrito(${p.id})" style="margin-top:6px;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:1px">Agregar al carrito →</button>
+      </div>
+      <button class="cart-item-remove" onclick="toggleWishlistItem(${p.id})">✕</button>
+    </div>`).join("");
+}
+
+function toggleWishlist() {
+  document.getElementById("wishlistDrawer").classList.toggle("open");
+  document.getElementById("cartOverlay").classList.toggle("show");
+  document.getElementById("cartDrawer").classList.remove("open");
+  renderWishlist();
+}
+
+// ===================== QUICK VIEW =====================
+function openQV(id) {
+  const p = productos.find(x=>x.id===id);
+  document.getElementById("qvModal").innerHTML=`
+    <div class="qv-img"><img src="${p.img}" alt="${p.nombre}"/></div>
+    <div class="qv-content">
+      <p class="qv-cat">✦ ${p.cat.charAt(0).toUpperCase()+p.cat.slice(1)}</p>
+      <h3 class="qv-name">${p.nombre}</h3>
+      <p class="qv-price">$${p.precio.toLocaleString("es-AR")} ARS</p>
+      <div class="qv-divider"></div>
+      <p class="qv-desc">${p.desc}</p>
+      <div class="qv-meta">
+        <div class="qv-meta-item"><p>Material</p><span>${p.mat}</span></div>
+        <div class="qv-meta-item"><p>Garantía</p><span>12 meses</span></div>
+        <div class="qv-meta-item"><p>Cuidado</p><span>Resistente al agua</span></div>
+        <div class="qv-meta-item"><p>Envío</p><span>A todo el país</span></div>
+      </div>
+      <div class="qty-wrap">
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="qty-val" id="qtyVal">1</span>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+      <button class="qv-add" onclick="addFromQV(${p.id})">Agregar al Carrito</button>
+    </div>`;
+  document.getElementById("qvOverlay").classList.add("show");
+}
+function closeQV(e) { if(e.target===document.getElementById("qvOverlay")) closeQVBtn(); }
+function closeQVBtn() { document.getElementById("qvOverlay").classList.remove("show"); }
+let qvQty = 1;
+function changeQty(delta) {
+  qvQty = Math.max(1, qvQty + delta);
+  document.getElementById("qtyVal").textContent = qvQty;
+}
+function addFromQV(id) {
+  agregarAlCarrito(id, qvQty);
+  qvQty = 1;
+  closeQVBtn();
+}
+
+// ===================== FILTERS =====================
+document.querySelectorAll(".filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    filtroActivo = btn.dataset.filter;
+    renderProductos(filtroActivo);
+  });
+});
+
+// ===================== TOAST =====================
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"),2800);
+}
+
+// ===================== SEARCH =====================
+function toggleSearch() {
+  const q = prompt("🔍 Buscá una joya:");
+  if(q){
+    const term = q.toLowerCase();
+    const res = productos.filter(p=>p.nombre.toLowerCase().includes(term)||p.cat.toLowerCase().includes(term));
+    if(!res.length){showToast("No encontramos resultados para: "+q);return;}
+    const grid=document.getElementById("productGrid");
+    grid.innerHTML="";
+    filtroActivo="all";
+    document.querySelectorAll(".filter-btn").forEach(b=>b.classList.remove("active"));
+    document.querySelector('[data-filter="all"]').classList.add("active");
+    res.forEach((p,i)=>{
+      const enWish = wishlist.find(w=>w.id===p.id);
+      grid.innerHTML+=`<div class="product-card reveal" style="transition-delay:${i*0.07}s" data-id="${p.id}">
+        <div class="product-img-wrap">
+          <img src="${p.img}" alt="${p.nombre}" loading="lazy"/>
+          ${p.tag?`<span class="product-tag ${p.tagClass}">${p.tag}</span>`:""}
+          <div class="product-actions">
+            <button class="action-btn heart-btn ${enWish?'liked':''}" onclick="toggleWishlistItem(${p.id})">🤍</button>
+            <button class="action-btn" onclick="openQV(${p.id})">👁️</button>
+          </div>
+        </div>
+        <div class="product-body">
+          <p class="product-cat">${p.cat.charAt(0).toUpperCase()+p.cat.slice(1)}</p>
+          <h3 class="product-name">${p.nombre}</h3>
+          <p class="product-mat">${p.mat}</p>
+          <div class="product-footer">
+            <span class="product-price">$${p.precio.toLocaleString("es-AR")}</span>
+            <button class="add-btn" onclick="agregarAlCarrito(${p.id})">+</button>
+          </div>
+        </div>
+      </div>`;
+    });
+    document.querySelectorAll(".reveal:not(.in)").forEach(el=>observer.observe(el));
+    document.getElementById("coleccion").scrollIntoView({behavior:"smooth"});
+    showToast(`🔍 ${res.length} resultado(s) para "${q}"`);
+  }
+}
+
+// ===================== MOBILE MENU =====================
+function toggleMobileMenu() {
+  document.getElementById("mobileNav").classList.toggle("open");
+}
+function closeMobileMenu() {
+  document.getElementById("mobileNav").classList.remove("open");
+}
+
+// ===================== SCROLL REVEAL =====================
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) { e.target.classList.add("in"); observer.unobserve(e.target); }
+  });
+},{threshold:0.1});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+// ===================== STICKY HEADER =====================
+window.addEventListener("scroll",()=>{
+  document.getElementById("mainHeader").classList.toggle("scrolled", window.scrollY>60);
+});
+
+// ===================== INIT =====================
+renderProductos();
+</script>
+</body>
+</html>
